@@ -16,6 +16,8 @@ module.exports = {
       "prefer-const": 0,
       "one-var": 0,
       "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0
+    },
+    globals: {
+      $: true
     }
   };
-  

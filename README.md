@@ -1,6 +1,6 @@
-# Electron capture screen
+# Electron-super-helper
 
-Capture Screen demo project Power by Electron
+A software based on electron that collects a variety of useful gadgets
 
 ## Usage
 

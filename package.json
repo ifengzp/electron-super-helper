@@ -1,5 +1,5 @@
 {
-  "name": "electron-screenshots",
+  "name": "electron-super-helper",
   "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
@@ -8,7 +8,10 @@
     "lint": "eslint --fix lib/**/*.js lib/**/*.html",
     "build": "electron-builder"
   },
-  "dependencies": {},
+  "dependencies": {
+    "aip-node-sdk": "^1.2.1",
+    "glob": "^7.1.4"
+  },
   "devDependencies": {
     "electron": "^6.0.11",
     "babel-eslint": "^10.0.1",

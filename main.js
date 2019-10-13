@@ -5,11 +5,14 @@
 // });
 
 const { app, BrowserWindow } = require("electron");
+const path = require("path");
+const glob = require("glob");
 
 let mainWindow = null;
 
 function initialize() {
   makeSingleInstance();
+  loadMainProcess();
 
   function createMainWindow() {
     mainWindow = new BrowserWindow({
@@ -18,7 +21,11 @@ function initialize() {
       resizable: false,
       fullscreen: false,
       maximizable: false,
-      fullscreenable: false
+      fullscreenable: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
+      // titleBarStyle: "hidden"
     });
     mainWindow.loadFile("./renderer-process/index.html");
 
@@ -48,4 +55,11 @@ function makeSingleInstance() {
   });
 }
 
+// Require each JS file in the main-process dir
+function loadMainProcess() {
+  const files = glob.sync(path.join(__dirname, "main-process/**/*.js"));
+  files.forEach(file => {
+    require(file);
+  });
+}
 initialize();

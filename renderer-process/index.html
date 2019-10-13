@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>小工具箱</title>
-  <link rel="stylesheet" href="./../lib/zui-ui/css/zui.min.css">
-  <script src="./../lib/jquery/jquery@v1.11.0.js"></script>
-  <script src="./../lib/zui-ui/js/zui.min.js"></script>
-</head>
-<body>
-  <i class="icon icon-resize"></i>
-  <button class="btn btn-primary" type="button">主要按钮</button>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>小工具箱</title>
+    <link rel="stylesheet" href="./../lib/zui-ui/css/zui.min.css" />
+    <script>
+      window.$ = window.jQuery = require("./../lib/jquery/jquery@v1.11.0.js");
+    </script>
+    <script src="./../lib/zui-ui/js/zui.min.js"></script>
+    <script src="./img2word/index.js"></script>
+  </head>
+  <body>
+    <div class="showResult"></div>
+    <div id="preview" style="width: 300px;height: 300px;background: red;"></div>
+    <p id="log" style="width: 300px;background: yellow;"></p>
+  </body>
 </html>
