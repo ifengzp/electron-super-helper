@@ -29,7 +29,7 @@ function initialize() {
     });
     mainWindow.loadFile("./renderer-process/index.html");
 
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     mainWindow.on("closed", () => {
       app.quit();

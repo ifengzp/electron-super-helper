@@ -11,10 +11,52 @@
     </script>
     <script src="./../lib/zui-ui/js/zui.min.js"></script>
     <script src="./img2word/index.js"></script>
+    <script src="./../lib/kindeditor/kindeditor.min.js"></script>
   </head>
-  <body>
-    <div class="showResult"></div>
-    <div id="preview" style="width: 300px;height: 300px;background: red;"></div>
-    <p id="log" style="width: 300px;background: yellow;"></p>
+  <body data-loading="拼命加载..." class="load-indicator">
+    <div id="error-tip" class="alert alert-danger with-icon" style="width: 400px;position: fixed; top: 30%; left: 200px; z-index: 9999;display: none;">
+      <i class="icon-frown"></i>
+      <div class="content"></div>
+    </div>
+    <div class="paste-area">
+      <div class="paste-area__title">右键粘贴或者拖拽图片到框内</div>
+      <div class="paste-area__preview"></div>
+    </div>
+    <textarea
+      id="contentSimple"
+      name="content"
+      class="form-control kindeditorSimple"
+      style="height:150px;"
+    ></textarea>
+    <style>
+      body {
+        padding: 20px;
+      }
+      .paste-area {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 0 20px 20px;
+        margin-bottom: 20px;
+      }
+      .paste-area__title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #353535;
+        text-align: center;
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+      }
+      .paste-area__preview {
+        height: 180px;
+        padding: 20px;
+      }
+      .paste-area__preview img {
+        max-height: 170px;
+        max-width: 700px;
+      }
+      .load-indicator:after {
+        content: '\e97b';
+      }
+    </style>
   </body>
 </html>
