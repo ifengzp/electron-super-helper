@@ -12,8 +12,15 @@ function initialize() {
   makeSingleInstance();
 
   function createMainWindow() {
-    mainWindow = new BrowserWindow({ width: 800, height: 600 });
-    mainWindow.loadFile("index.html");
+    mainWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      resizable: false,
+      fullscreen: false,
+      maximizable: false,
+      fullscreenable: false
+    });
+    mainWindow.loadFile("./renderer-process/index.html");
 
     mainWindow.webContents.openDevTools();
 
