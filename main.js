@@ -4,30 +4,34 @@
 //   logger: require("electron-log")
 // });
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const Img2wordWindow = require("./main-process/img2word");
 const path = require("path");
 const glob = require("glob");
 
 let mainWindow = null;
+let img2wordWindow = null;
 
 function initialize() {
   makeSingleInstance();
   loadMainProcess();
+  initIpc();
 
   function createMainWindow() {
     mainWindow = new BrowserWindow({
-      width: 800,
-      height: 600,
+      width: 256,
+      height: 256,
       resizable: false,
       fullscreen: false,
       maximizable: false,
       fullscreenable: false,
+      // frame: false,
+      // transparent: true,
       webPreferences: {
         nodeIntegration: true
       }
-      // titleBarStyle: "hidden"
     });
-    mainWindow.loadFile("./renderer-process/index.html");
+    mainWindow.loadFile("./renderer-process/main/index.html");
 
     // mainWindow.webContents.openDevTools();
 
@@ -62,4 +66,15 @@ function loadMainProcess() {
     require(file);
   });
 }
+
+function initIpc() {
+  ipcMain.on("createImg2wordWindow", event => {
+    if (this.img2wordWindow && !this.img2wordWindow.win.isDestroyed()) {
+      this.img2wordWindow.win.focus();
+    } else {
+      this.img2wordWindow = new Img2wordWindow();
+    }
+  });
+}
+
 initialize();

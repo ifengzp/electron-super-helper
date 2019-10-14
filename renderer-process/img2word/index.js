@@ -1,9 +1,9 @@
 const { ipcRenderer } = require("electron");
 $(document).ready(function() {
   let editor = KindEditor.create("textarea.kindeditorSimple", {
-    basePath: "./../lib/kindeditor/",
+    basePath: "./../../lib/kindeditor/",
     bodyClass: "article-content",
-    cssPath: "./../lib/zui-ui/css/zui.min.css",
+    cssPath: "./../../lib/zui-ui/css/zui.min.css",
     resizeType: 1,
     height: 280,
     allowPreviewEmoticons: false,

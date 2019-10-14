@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>小工具箱</title>
+    <link rel="stylesheet" href="./../../lib/zui-ui/css/zui.min.css" />
+    <script>
+      window.$ = window.jQuery = require("./../../lib/jquery/jquery@v1.11.0.js");
+    </script>
+    <script src="./../../lib/zui-ui/js/zui.min.js"></script>
+    <script src="./index.js"></script>
+  </head>
+  <body style="-webkit-app-region: drag;">
+    <div>
+      <button class="btn btn-primary" id="img2word" type="button">
+        图片取字
+      </button>
+    </div>
+    <div>
+      <button class="btn btn-primary" id="img2word" type="button">
+        pdf转图片
+      </button>
+    </div>
+    <div>
+      <button class="btn btn-primary" id="img2word" type="button">
+        图片压缩
+      </button>
+    </div>
+
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        margin: 10px;
+        background-color: #fff;
+        -webkit-app-region: drag;
+      }
+      button {
+        outline: none !important;
+        -webkit-app-region: no-drag;
+      }
+      div {
+        margin: 10px 0;
+      }
+    </style>
+  </body>
+</html>

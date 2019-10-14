@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "lint": "eslint --fix lib/**/*.js lib/**/*.html",
-    "build": "electron-builder"
+    "build": "electron-builder  -mwl --x64"
   },
   "dependencies": {
     "aip-node-sdk": "^1.2.1",
