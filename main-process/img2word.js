@@ -9,12 +9,16 @@ const client = new AipOcrClient(APP_ID, API_KEY, SECRET_KEY);
 
 ipcMain.on("send-ocr-event", (event, path) => {
   const image = path ? nativeImage.createFromPath(path) : clipboard.readImage("clipboard");
-  if (image) {
+  if (image.isEmpty()) {
+    event.sender.send("render-ocr-error", "请上传图片文件");
+  } else {
     const base64Img = image.toPNG().toString("base64");
     client.generalBasic(base64Img).then(res => {
-      event.sender.send("render-ocr-event", res, image.toDataURL());
+      if (res.error_code && res.error_msg) {
+        event.sender.send("render-ocr-error", res.error_msg);
+      } else {
+        event.sender.send("render-ocr-event", res, image.toDataURL());
+      }
     });
-  } else {
-    event.sender.send("render-ocr-error");
   }
 });

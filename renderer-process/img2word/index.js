@@ -27,7 +27,7 @@ $(document).ready(function() {
     ]
   });
 
-  $(document).on("paste", function(event) {
+  $(".paste-area__preview").on("paste", function(event) {
     $("body").addClass("loading");
     ipcRenderer.send("send-ocr-event");
   });
@@ -39,17 +39,26 @@ $(document).ready(function() {
         event.originalEvent.dataTransfer &&
         event.originalEvent.dataTransfer.files;
       if (!files) {
-        $("#error-tip").show().delay(800).fadeOut(500);
+        $("#error-tip")
+          .show()
+          .delay(800)
+          .fadeOut(500);
         $("#error-tip .content").html("没有文件");
         return;
       }
       if (files.length !== 1) {
-        $("#error-tip").show().delay(800).fadeOut(500);
+        $("#error-tip")
+          .show()
+          .delay(800)
+          .fadeOut(500);
         $("#error-tip .content").html("暂时不支持多文件上传");
         return;
       }
       if (files[0].type.indexOf("image") < 0) {
-        $("#error-tip").show().delay(800).fadeOut(500);
+        $("#error-tip")
+          .show()
+          .delay(800)
+          .fadeOut(500);
         $("#error-tip .content").html("请上传图片文件");
         return;
       }
@@ -64,9 +73,12 @@ $(document).ready(function() {
     );
     editor.html(list.map(item => "<p>" + item.words + "</p>").join(""));
   });
-  ipcRenderer.on("render-ocr-error", (event) => {
+  ipcRenderer.on("render-ocr-error", (event, msg) => {
     $("body").removeClass("loading");
-    $("#error-tip").show().delay(800).fadeOut(500);
-    $("#error-tip .content").html("解析文件出错，请重试");
+    $("#error-tip")
+      .show()
+      .delay(800)
+      .fadeOut(500);
+    $("#error-tip .content").html(msg || "解析文件出错，请重试");
   });
 });
