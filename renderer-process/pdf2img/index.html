@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>PDF转换图片</title>
+    <script>
+      window.$ = window.jQuery = require("./../../lib/jquery/jquery@v1.11.0.js");
+    </script>
+    <script
+      type="text/javascript"
+      src="./../../lib/jszip/jszip.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./../../lib/fileSaver/FileSaver.js"
+    ></script>
+    <script type="text/javascript" src="./../../lib//pdf/pdf.js"></script>
+    <script
+      type="text/javascript"
+      src="./../../lib//pdf/pdf.worker.js"
+    ></script>
+    <script src="./js/btn.js"></script>
+    <script src="./js/index.js"></script>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box__header">PDF 转换图片</div>
+      <div class="box__center">
+        <div class="box__progress--green">
+          <div class="box__progress-btn" id="main_btn">上传PDF</div>
+          <input type="file" id="file-btn" accept="application/pdf" />
+        </div>
+      </div>
+      <div class="box__tip" id="abnormal_tip"></div>
+      <div class="box__bottom">
+        <div class="box__btn" id="jpg">另存为jpg</div>
+        <div class="box__btn" id="png">另存为png</div>
+      </div>
+      <div id="container"></div>
+    </div>
+    <style>
+      body {
+        margin: 0;
+      }
+      .box {
+        width: 350px;
+        height: 450px;
+        position: relative;
+        /* border-radius: 15px; */
+        overflow: hidden;
+        background-color: #f4f4f4;
+        user-select: none;
+      }
+      .box__header {
+        height: 120px;
+        background-color: #aebf9f;
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+        line-height: 120px;
+      }
+
+      .box__center {
+        width: 160px;
+        height: 160px;
+        margin: 40px auto 0;
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: #c4c7ce;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .box__progress--green {
+        width: 144px;
+        height: 144px;
+        border-radius: 50%;
+        /* background-color: #AEBF9F; */
+        background-color: #9ea2ac;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .box__progress-btn {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: #c4c7ce;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #e8e9ee;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      #file-btn {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        position: absolute;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+      }
+      .box__tip {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        top: 340px;
+        color: #ccc;
+        display: none;
+      }
+      .box__bottom {
+        margin: 60px auto 0;
+        padding: 0 50px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .box__btn {
+        width: 100px;
+        height: 34px;
+        background-color: #aebf9f;
+        color: #fff;
+        font-size: 14px;
+        line-height: 34px;
+        text-align: center;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      #container {
+        display: none;
+      }
+    </style>
+  </body>
+</html>

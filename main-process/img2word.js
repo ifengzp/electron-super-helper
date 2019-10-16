@@ -34,7 +34,8 @@ module.exports = class img2wordWindow {
         "./../renderer-process/img2word/index.html"
       )
     );
-    // this.win.webContents.openDevTools();
+    this.win.setMenuBarVisibility(false);
+    this.win.webContents.openDevTools();
   }
 
   initIPC() {

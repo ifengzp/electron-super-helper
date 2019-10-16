@@ -6,11 +6,14 @@
 
 const { app, BrowserWindow, ipcMain } = require("electron");
 const Img2wordWindow = require("./main-process/img2word");
+const Pdf2imgWindow = require("./main-process/pdf2img");
+
 const path = require("path");
 const glob = require("glob");
 
 let mainWindow = null;
 let img2wordWindow = null;
+let pdf2imgWindow = null;
 
 function initialize() {
   makeSingleInstance();
@@ -31,6 +34,7 @@ function initialize() {
         nodeIntegration: true
       }
     });
+    mainWindow.setMenuBarVisibility(false);
     mainWindow.loadFile("./renderer-process/main/index.html");
 
     // mainWindow.webContents.openDevTools();
@@ -73,6 +77,13 @@ function initIpc() {
       this.img2wordWindow.win.focus();
     } else {
       this.img2wordWindow = new Img2wordWindow();
+    }
+  });
+  ipcMain.on("createPdf2imgWindow", event => {
+    if (this.pdf2imgWindow && !this.pdf2imgWindow.win.isDestroyed()) {
+      this.pdf2imgWindow.win.focus();
+    } else {
+      this.pdf2imgWindow = new Pdf2imgWindow();
     }
   });
 }
