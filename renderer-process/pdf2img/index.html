@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>PDF转换图片</title>
+    <link rel="stylesheet" href="./../../lib/zui-ui/css/zui.min.css" />
     <script>
       window.$ = window.jQuery = require("./../../lib/jquery/jquery@v1.11.0.js");
     </script>
+    <script src="./../../lib/zui-ui/js/zui.min.js"></script>
     <script
       type="text/javascript"
       src="./../../lib/jszip/jszip.min.js"
@@ -21,120 +23,166 @@
       type="text/javascript"
       src="./../../lib//pdf/pdf.worker.js"
     ></script>
-    <script src="./js/btn.js"></script>
     <script src="./js/index.js"></script>
   </head>
   <body>
-    <div class="box">
-      <div class="box__header">PDF 转换图片</div>
-      <div class="box__center">
-        <div class="box__progress--green">
-          <div class="box__progress-btn" id="main_btn">上传PDF</div>
-          <input type="file" id="file-btn" accept="application/pdf" />
+    <div class="my-loading loading load-indicator" data-loading="稍等片刻，正在努力工作...">
+    </div>
+    <div class="header">
+      <div class="header__drop">
+        <i class="icon icon-upload-alt"></i>
+        <p>拖拽或者点击上传PDF</p>
+        <input type="file" id="file-btn" accept="application/pdf" />
+        <!-- <div class="reset-btn">
+          <button class="btn btn-primary" id="reset-btn" type="button">重传文件</button>
+        </div> -->
+      </div>
+      <div class="header__info">
+        <div>
+          <strong>Name：</strong><span class="header__info-name"></span>
+        </div>
+        <div>
+          <strong>Pages：</strong><span class="header__info-pages"></span>
+        </div>
+        <div>
+            <strong>Size：</strong><span class="header__info-size"></span>
+        </div>
+        <div>
+          <strong>Path：</strong><span class="header__info-path"></span>
+        </div>
+        <div>
+            <button class="btn btn-primary disabled" disabled id="jpg" type="button">转换为jpg格式</button>
+        </div>
+        <button class="btn btn-primary disabled" disabled id="png" type="button">转换为png格式</button>
+        <div class="checkbox all-select-btn">
+          <label>
+            <input type="checkbox" id="selectAll" checked value="-1"> 全选
+          </label>
         </div>
       </div>
-      <div class="box__tip" id="abnormal_tip"></div>
-      <div class="box__bottom">
-        <div class="box__btn" id="jpg">另存为jpg</div>
-        <div class="box__btn" id="png">另存为png</div>
-      </div>
-      <div id="container"></div>
+    </div>
+    <div class="my-content scrollbar-hover" id="container">
+      <!-- <div class="my-content__item">
+        <img data-toggle="lightbox" src="./../../assets/img/pic-0.jpg" data-image="./../../assets/img/pic-0.jpg" data-caption="图片的描述" class="img-thumbnail" alt="" >
+        <div class="my-content__item-desc">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> pic-0
+              </label>
+            </div>
+        </div>
+      </div> -->
     </div>
     <style>
-      body {
-        margin: 0;
-      }
-      .box {
-        width: 350px;
-        height: 450px;
-        position: relative;
-        /* border-radius: 15px; */
-        overflow: hidden;
-        background-color: #f4f4f4;
-        user-select: none;
-      }
-      .box__header {
-        height: 120px;
-        background-color: #aebf9f;
-        color: #fff;
-        font-size: 30px;
-        text-align: center;
-        line-height: 120px;
-      }
 
-      .box__center {
-        width: 160px;
-        height: 160px;
-        margin: 40px auto 0;
-        overflow: hidden;
-        border-radius: 50%;
-        background-color: #c4c7ce;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
 
-      .box__progress--green {
-        width: 144px;
-        height: 144px;
-        border-radius: 50%;
-        /* background-color: #AEBF9F; */
-        background-color: #9ea2ac;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
+      .my-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99;
+        background-color: rgba(0, 0, 0,.5);
+        display: none;
       }
-      .box__progress-btn {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-color: #c4c7ce;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: #e8e9ee;
-        cursor: pointer;
-        overflow: hidden;
+      .load-indicator:after, .load-indicator:before {
+        color: #673AB7;
       }
-      #file-btn {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
+      .my-loading .progress {
+        width: 400px;
         position: absolute;
-        outline: none;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 40%;
+      }
+      .header {
+        padding: 20px 50px 20px;
+        border-bottom: 2px solid #eee;
+        display: flex;
+        position: relative;
+      }
+      .header__drop {
+        width: 200px;
+        height: 200px;
+        background-color: #eee;
+        border: 2px dotted #673AB7;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #673AB7;
+        cursor: pointer;
+        position: relative;
+      }
+      .header__drop input {
+        position: absolute;
+        width: 200px;
+        height: 200px;
         opacity: 0;
-        cursor: pointer;
       }
-      .box__tip {
-        width: 100%;
-        position: absolute;
-        text-align: center;
-        top: 340px;
-        color: #ccc;
-        display: none;
+      .header__drop i {
+        font-size: 40px;
       }
-      .box__bottom {
-        margin: 60px auto 0;
-        padding: 0 50px;
+      .header__info {
+        margin-left: 40px;
+      }
+      .header__info div {
+        max-width: 450px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+      .my-content {
+        height: 330px;
+        width: 780px;
+        margin: 0 auto;
+        padding: 20px;
+        overflow-y: scroll;
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
       }
-      .box__btn {
-        width: 100px;
-        height: 34px;
-        background-color: #aebf9f;
-        color: #fff;
-        font-size: 14px;
-        line-height: 34px;
-        text-align: center;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-      #container {
-        display: none;
-      }
+    .my-content__item {
+      width: 120px;
+      height: 152px;
+      margin: 10px;
+      position: relative;
+    }
+    .my-content__item-desc {
+      width: calc(100% - 10px);
+      background-color: rgba(125, 125, 125, .6) ;
+      position: absolute;
+      margin: 0 5px 5px;
+      padding: 0 5px;
+      bottom: 2px;
+    }
+    .my-content__item-desc .checkbox {
+      margin: 4px 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+    }
+    button {
+      outline: none !important;
+    }
+    .all-select-btn {
+      position: absolute;
+      bottom: 0px;
+      right: 40px;
+      display: none;
+    }
+    .reset-btn {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 240, 213, 0.8);
+    }
     </style>
   </body>
 </html>
