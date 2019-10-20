@@ -29,7 +29,7 @@ module.exports = class pdf2imgWindow {
       )
     );
     this.win.setMenuBarVisibility(false);
-    this.win.webContents.openDevTools();
+    // this.win.webContents.openDevTools();
   }
 
   initIPC() {
