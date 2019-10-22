@@ -24,7 +24,8 @@ module.exports = class img2wordWindow {
       maximizable: false,
       fullscreenable: false,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        devTools: false
       }
     });
     this.win.loadURL(

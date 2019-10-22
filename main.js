@@ -1,8 +1,8 @@
-// require("update-electron-app")({
-//   repo: "github-user/repo",
-//   updateInterval: "1 hour",
-//   logger: require("electron-log")
-// });
+require("update-electron-app")({
+  repo: "git@github.com:ifengzp/electron-super-helper.git",
+  updateInterval: "1 hour",
+  logger: require("electron-log")
+});
 
 const { app, BrowserWindow, ipcMain } = require("electron");
 const Img2wordWindow = require("./main-process/img2word");
@@ -31,7 +31,8 @@ function initialize() {
       // frame: false,
       // transparent: true,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        devTools: false
       }
     });
     mainWindow.setMenuBarVisibility(false);

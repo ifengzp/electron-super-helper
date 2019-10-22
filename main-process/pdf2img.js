@@ -18,7 +18,8 @@ module.exports = class pdf2imgWindow {
       maximizable: false,
       fullscreenable: false,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        devTools: false
       }
     });
     this.win.loadURL(
