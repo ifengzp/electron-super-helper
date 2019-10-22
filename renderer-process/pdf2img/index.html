@@ -26,8 +26,10 @@
     <script src="./js/index.js"></script>
   </head>
   <body>
-    <div class="my-loading loading load-indicator" data-loading="稍等片刻，正在努力工作...">
-    </div>
+    <div
+      class="my-loading loading load-indicator"
+      data-loading="稍等片刻，正在努力工作..."
+    ></div>
     <div class="header">
       <div class="header__drop">
         <i class="icon icon-upload-alt"></i>
@@ -39,25 +41,61 @@
       </div>
       <div class="header__info">
         <div>
-          <strong>Name：</strong><span class="header__info-name"></span>
+          <strong>Name：</strong><span class="header__info-name">--</span>
         </div>
         <div>
-          <strong>Pages：</strong><span class="header__info-pages"></span>
+          <strong>Pages：</strong><span class="header__info-pages">--</span>
         </div>
         <div>
-            <strong>Size：</strong><span class="header__info-size"></span>
+          <strong>Size：</strong><span class="header__info-size">--</span>
         </div>
         <div>
-          <strong>Path：</strong><span class="header__info-path"></span>
+          <strong>Path：</strong><span class="header__info-path">--</span>
         </div>
         <div>
-            <button class="btn btn-primary disabled" disabled id="jpg" type="button">转换为jpg格式</button>
+          <button
+            class="btn btn-primary disabled"
+            disabled
+            id="jpg"
+            type="button"
+          >
+            转换为jpg格式
+          </button>
         </div>
-        <button class="btn btn-primary disabled" disabled id="png" type="button">转换为png格式</button>
-        <div class="checkbox all-select-btn">
-          <label>
-            <input type="checkbox" id="selectAll" checked value="-1"> 全选
-          </label>
+        <button
+          class="btn btn-primary disabled"
+          disabled
+          id="png"
+          type="button"
+        >
+          转换为png格式
+        </button>
+        <div class="my-radio-group">
+          <div class="radio my-radio">
+            <label>
+              <input type="radio" name="radioOptionsExample" value="1" /> 无损质量
+            </label>
+          </div>
+          <div class="radio my-radio">
+            <label>
+              <input type="radio" name="radioOptionsExample" value="0.9" /> 90%
+            </label>
+          </div>
+          <div class="radio my-radio">
+            <label>
+              <input type="radio" checked name="radioOptionsExample" value="0.8" /> 80%
+            </label>
+          </div>
+          <div class="radio my-radio">
+            <label>
+              <input type="radio" name="radioOptionsExample" value="0.7" /> 70%
+            </label>
+          </div>
+          <div class="checkbox all-select-btn">
+            <label>
+              <input type="checkbox" id="selectAll" checked value="-1" /> 全选图片
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -74,20 +112,19 @@
       </div> -->
     </div>
     <style>
-
-
       .my-loading {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 99;
-        background-color: rgba(0, 0, 0,.5);
+        z-index: 9999;
+        background-color: rgba(0, 0, 0, 0.5);
         display: none;
       }
-      .load-indicator:after, .load-indicator:before {
-        color: #673AB7;
+      .load-indicator:after,
+      .load-indicator:before {
+        color: #673ab7;
       }
       .my-loading .progress {
         width: 400px;
@@ -106,13 +143,13 @@
         width: 200px;
         height: 200px;
         background-color: #eee;
-        border: 2px dotted #673AB7;
+        border: 2px dotted #673ab7;
         border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        color: #673AB7;
+        color: #673ab7;
         cursor: pointer;
         position: relative;
       }
@@ -132,7 +169,7 @@
         max-width: 450px;
         margin-bottom: 10px;
         overflow: hidden;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
         white-space: nowrap;
       }
       .my-content {
@@ -144,45 +181,59 @@
         display: flex;
         flex-wrap: wrap;
       }
-    .my-content__item {
-      width: 120px;
-      height: 152px;
-      margin: 10px;
-      position: relative;
-    }
-    .my-content__item-desc {
-      width: calc(100% - 10px);
-      background-color: rgba(125, 125, 125, .6) ;
-      position: absolute;
-      margin: 0 5px 5px;
-      padding: 0 5px;
-      bottom: 2px;
-    }
-    .my-content__item-desc .checkbox {
-      margin: 4px 0;
-      font-size: 16px;
-      font-weight: bold;
-      color: #000;
-    }
-    button {
-      outline: none !important;
-    }
-    .all-select-btn {
-      position: absolute;
-      bottom: 0px;
-      right: 40px;
-      display: none;
-    }
-    .reset-btn {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(255, 240, 213, 0.8);
-    }
+      .my-content__item {
+        width: 120px;
+        height: 152px;
+        margin: 10px;
+        position: relative;
+      }
+      .my-content__item-desc {
+        width: 100%;
+        background-color: rgba(125, 125, 125, 0.6);
+        position: absolute;
+        padding: 0 5px;
+        bottom: 0px;
+        left: 0;
+      }
+      .my-content__item-desc .checkbox {
+        margin: 4px 0;
+        font-size: 16px;
+        font-weight: bold;
+        color: #000;
+      }
+      button {
+        outline: none !important;
+      }
+      .my-radio-group {
+        width: 350px;
+        height: 24px;
+        margin-bottom: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: absolute;
+        bottom: 0px;
+        right: 20px;
+        visibility: hidden;
+      }
+      .my-radio {
+        margin: 0 !important;
+        overflow: visible !important;
+        flex-shrink: 0;
+      }
+      .all-select-btn {
+        flex-shrink: 0;
+      }
+      .reset-btn {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 240, 213, 0.8);
+      }
     </style>
   </body>
 </html>

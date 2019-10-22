@@ -23,7 +23,7 @@ $(document).ready(function() {
           $(".header__info-size").html(file.size + '字节')
           $(".header__info-path").html(file.path)
           $(".header__info-pages").html(pdf.numPages + "页")
-          $(".all-select-btn").show()
+          $(".my-radio-group").css('visibility','visible')
           $(".header__drop").html('<div class="reset-btn"><button class="btn btn-primary" id="reset-btn" type="button">重传文件</button></div>')
           $("#reset-btn").on("click", function() {
             window.location.reload()
@@ -47,14 +47,14 @@ $(document).ready(function() {
     Promise.all(readQueue).then(arr => {
       let renderQueue = arr.map((item, idx) => {
         let canvas = document.createElement("canvas");
-        canvas.setAttribute('class', 'img-thumbnail');
         let ctx = canvas.getContext("2d");
         let viewport = item.getViewport(scale);
         let div = document.createElement("div");
-        div.setAttribute('class', 'my-content__item');
+        div.setAttribute('class', 'my-content__item img-thumbnail');
         div.append(canvas)
         let newDiv = document.createElement("div");
-        newDiv.innerHTML = '<div class="my-content__item-desc"><div class="checkbox"><label><input value='+idx+' checked type="checkbox"> pic-'+idx+'</label></div></div>';
+        newDiv.setAttribute('class', 'my-content__item-desc');
+        newDiv.innerHTML = '<div class="checkbox"><label><input value='+idx+' checked type="checkbox"> pic-'+idx+'</label></div>';
         div.append(newDiv)
         container.append(div);
         canvas.id = idx;
@@ -95,7 +95,7 @@ function download(type) {
   if (isDownloading) return;
   isDownloading = true;
   $(".my-loading").show()
-  let typeStr = type == png ? "image/png" : "image/jpg";
+  let typeStr = type == png ? "image/png" : "image/jpeg";
   let zip = new JSZip();
   let images = zip.folder("images");
   let chooseArr = []
@@ -103,12 +103,12 @@ function download(type) {
      const idx = +$(this).val()
      idx > -1 && chooseArr.push(idx)
   });
-  console.log(chooseArr)
+  let encoderOptions = +$('input:radio:checked').val() || 1
   $("#container canvas").each(function(idx) {
     if (chooseArr.indexOf(idx) < 0) return
     images.file(
       "pic-" + idx + "." + type,
-      base64toBlob($(this)[0].toDataURL(typeStr, 0.6)),
+      base64toBlob($(this)[0].toDataURL(typeStr, encoderOptions)),
       {
         base64: true
       }
