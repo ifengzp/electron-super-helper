@@ -1,11 +1,23 @@
 # Electron-super-helper
 
-A software based on electron that collects a variety of useful gadgets
+一款基于electron写的小工具箱，用来存放一些自己常用的工具集合；
 
-## Usage
+在平时有些挺有用的办公工具比如截图取字，可以大大提高效率，就顺手写一个将就用一下，目前功能只有两个：
+- 截图取字
+- PDF转图
 
-clone project
+目前除了这两个功能能够大大提升我的效率外，还没想到要添加什么其他功能，后面如果再遇到痒点会慢慢往上面造轮子，大于五个会考虑重构下代码
 
-yarn
+# TODO
+- [ ] 图片压缩
+- [ ] 更新
 
-yarn start
+
+# 下载
+
+[mac](./dist/super-helper-1.0.0.dmg)
+
+[window](./dist/super-helper-1.0.0.exe)
+
+
+
