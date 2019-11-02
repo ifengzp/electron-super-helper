@@ -1,5 +1,7 @@
-const Fontmin = require("fontmin");
 const { dialog } = require("electron").remote;
+const Fontmin = require("fontmin");
+const nunjucks = require("nunjucks");
+const fs = require("fs");
 const path = require("path");
 let srcPath = "";
 let workingFlag = false;
@@ -38,12 +40,18 @@ $(document).ready(function() {
       return;
     }
     const font = new FontFace("yourFont", "url('" + file.path + "')");
-    $(".fontPath").text("当前字体路径： " + file.path);
     font.load().then(function(loaded) {
       document.fonts.add(loaded);
       srcPath = file.path;
-
+      $(".fontPath").text("当前字体路径： " + file.path);
       $(".contrast-content").css("fontFamily", "yourFont");
+    }).catch(err => {
+      $("#error-tip")
+        .show()
+        .delay(800)
+        .fadeOut(500);
+      $("#error-tip .content").html("上传字体文件有误");
+      console.log(err);
     });
   });
 
@@ -52,11 +60,12 @@ $(document).ready(function() {
     workingFlag = true;
     dialog.showSaveDialog().then(res => {
       if (res.canceled) return;
+      const text = $(".contrast-content").text();
       const fontmin = new Fontmin()
         .src(srcPath || path.join(__filename, "../font-default.ttf"))
         .use(
           Fontmin.glyph({
-            text: $(".contrast-content").text()
+            text: text
           })
         )
         .use(Fontmin.ttf2eot({ clone: true }))
@@ -67,17 +76,31 @@ $(document).ready(function() {
 
       $(".my-loading").show();
       fontmin.run(function(err, files) {
+        let fontFamily = "webfont";
+        workingFlag = false;
         $(".my-loading")
           .delay(800)
           .hide();
-        workingFlag = false;
         if (err) {
           $("#error-tip")
             .show()
             .delay(800)
             .fadeOut(500);
           $("#error-tip .content").html(err || "解析文件出错，请重试");
+          return;
         }
+        try {
+          fontFamily = files[0].basename.split(".")[0];
+        } catch (error) {
+          console.log(error);
+        }
+        nunjucks.render(path.join(__filename, "../template.html"), {
+          fontFamily: fontFamily,
+          text: text
+        }, function(err, str) {
+          if (err) return;
+          fs.writeFileSync(path.join(res.filePath, "./demo.html"), str, "utf8");
+        });
         console.log("done");
       });
     });

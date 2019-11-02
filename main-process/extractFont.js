@@ -19,7 +19,7 @@ module.exports = class img2wordWindow {
       fullscreenable: false,
       webPreferences: {
         nodeIntegration: true,
-        devTools: true
+        devTools: false
       }
     });
     this.win.loadURL(
@@ -30,7 +30,7 @@ module.exports = class img2wordWindow {
       )
     );
     this.win.setMenuBarVisibility(false);
-    this.win.webContents.openDevTools();
+    // this.win.webContents.openDevTools();
   }
 
   initIPC() {
