@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "aip-node-sdk": "^1.2.1",
+    "fontmin": "^0.9.8",
     "glob": "^7.1.4"
   },
   "devDependencies": {

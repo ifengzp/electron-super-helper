@@ -6,4 +6,7 @@ $(document).ready(function() {
   $("#pdf2img").click(e => {
     ipcRenderer.send("createPdf2imgWindow");
   });
+  $("#extractFont").click(e => {
+    ipcRenderer.send("createExtractFontWindow");
+  });
 });

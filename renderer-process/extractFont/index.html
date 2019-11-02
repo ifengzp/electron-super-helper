@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>字体包瘦身</title>
+    <link rel="stylesheet" href="./../../lib/zui-ui/css/zui.min.css" />
+    <script>
+      window.$ = window.jQuery = require("./../../lib/jquery/jquery@v1.11.0.js");
+    </script>
+    <script src="./../../lib/zui-ui/js/zui.min.js"></script>
+    <script src="./index.js"></script>
+    <script src="./../../lib/kindeditor/kindeditor.min.js"></script>
+  </head>
+  <body>
+    <div
+      class="my-loading loading load-indicator"
+      data-loading="稍等片刻，正在努力工作..."
+    ></div>
+    <div id="error-tip" class="alert alert-danger with-icon" style="width: 400px;position: fixed; top: 30%; left: 200px; z-index: 9999;display: none;">
+        <i class="icon-frown"></i>
+        <div class="content"></div>
+      </div>
+    <div class="header">
+      <div class="header__drop">
+        <i class="icon icon-upload-alt"></i>
+        <p>拖拽或者点击上传 <span>.ttf</span> 字体</p>
+        <div class="fontPath"></div>
+        <input type="file" id="file-btn" accept=".ttf"/>
+      </div>
+      <div class="header__info">
+        <ul>
+          <li>先引入完整的<span>.ttf</span>字体包，操作中途请不要删除本地文件</li>
+          <li>左侧输入你要提取的文字，在右侧预览字体效果</li>
+          <li>效果符合预期，点击按钮提取字体</li>
+        </ul>
+        <button
+          class="btn btn-primary"
+          type="button"
+          id="extract"
+        >
+          提取成小字体包
+        </button>
+      </div>
+    </div>
+    <div class="zone">
+      <textarea name="content" class="form-control editorLeft"></textarea>
+      <div class="contrast">
+        <div class="contrast-header">提取结果预览</div>
+        <div class="contrast-content"></div>
+      </div>
+    </div>
+
+    <style>
+      .my-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+      .load-indicator:after,
+      .load-indicator:before {
+        color: #673ab7;
+      }
+      .my-loading .progress {
+        width: 400px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 40%;
+      }
+      body {
+        padding: 20px;
+        overflow: hidden;
+      }
+      .header {
+        padding: 0 0 20px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #eee;
+        display: flex;
+        position: relative;
+      }
+      .header__drop {
+        width: 380px;
+        height: 120px;
+        background-color: #eee;
+        border: 2px dotted #673ab7;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #673ab7;
+        cursor: pointer;
+        position: relative;
+      }
+      .header__drop input {
+        position: absolute;
+        width: 380px;
+        height: 120px;
+        opacity: 0;
+      }
+      .header__drop i {
+        font-size: 40px;
+      }
+      .header__info {
+        padding: 8px 0 0 20px;
+      }
+      .fontPath {
+        width: 350px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        position: absolute;
+        bottom: 0;
+      }
+      .zone {
+        display: flex;
+        justify-content: space-between;
+      }
+      .ke-container {
+        width: 370px !important;
+      }
+      @font-face {
+        font-family: "myfont";
+        src: url("./font-default.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      .contrast {
+        width: 370px;
+        height: 370px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .contrast-header {
+        height: 27px;
+        padding: 2px 5px;
+        overflow: hidden;
+        text-align: left;
+        zoom: 1;
+        background-color: #fff;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+      }
+      .contrast-content {
+        height: 340px;
+        overflow: scroll;
+        padding: 5px;
+        font-family: myfont;
+        font-size: 17px;
+        user-select: none;
+      }
+    </style>
+  </body>
+</html>

@@ -7,6 +7,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const Img2wordWindow = require("./main-process/img2word");
 const Pdf2imgWindow = require("./main-process/pdf2img");
+const ExtractFontWindow = require("./main-process/extractFont");
 
 const path = require("path");
 const glob = require("glob");
@@ -14,6 +15,7 @@ const glob = require("glob");
 let mainWindow = null;
 let img2wordWindow = null;
 let pdf2imgWindow = null;
+let extractFontWindow = null;
 
 function initialize() {
   makeSingleInstance();
@@ -85,6 +87,13 @@ function initIpc() {
       this.pdf2imgWindow.win.focus();
     } else {
       this.pdf2imgWindow = new Pdf2imgWindow();
+    }
+  });
+  ipcMain.on("createExtractFontWindow", event => {
+    if (this.extractFontWindow && !this.extractFontWindow.win.isDestroyed()) {
+      this.extractFontWindow.win.focus();
+    } else {
+      this.extractFontWindow = new ExtractFontWindow();
     }
   });
 }
