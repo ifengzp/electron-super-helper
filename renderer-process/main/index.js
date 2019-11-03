@@ -14,7 +14,7 @@ $(document).ready(function() {
 });
 
 $.get(
-  "https://super-helper.ifengzp.com/client/check_version",
+  "http://super-helper.ifengzp.com/client/check_version",
   {
     version: version,
     os: process.platform === "win32" ? "win" : "mac"
