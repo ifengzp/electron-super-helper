@@ -2,6 +2,7 @@ const { ipcRenderer, shell } = require("electron");
 const version = require("./../../package.json").version;
 
 $(document).ready(function() {
+  $("title").html("小工具箱 v" + version);
   $("#img2word").click(e => {
     ipcRenderer.send("createImg2wordWindow");
   });
@@ -10,6 +11,10 @@ $(document).ready(function() {
   });
   $("#extractFont").click(e => {
     ipcRenderer.send("createExtractFontWindow");
+  });
+  $(".report-btn").click(e => {
+    e.preventDefault();
+    shell.openExternal("https://github.com/ifengzp/electron-super-helper/issues");
   });
 });
 
