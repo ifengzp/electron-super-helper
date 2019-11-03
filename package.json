@@ -6,13 +6,15 @@
   "scripts": {
     "start": "electron .",
     "lint": "eslint --fix lib/**/*.js lib/**/*.html",
-    "build": "electron-builder  -mwl --x64"
+    "build": "electron-builder  -mwl --x64",
+    "serve": "node server index.js"
   },
   "dependencies": {
     "aip-node-sdk": "^1.2.1",
     "fontmin": "^0.9.8",
     "glob": "^7.1.4",
-    "nunjucks": "^3.2.0"
+    "nunjucks": "^3.2.0",
+    "pm2": "pm2 start npm --name super-helper -- run serve --watch"
   },
   "devDependencies": {
     "electron": "^6.0.11",
