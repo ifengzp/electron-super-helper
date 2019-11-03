@@ -1,24 +1,20 @@
-# Electron-super-helper
+<p align="center">
+  <img width="375" height="80" src="http://qiniu.ifengzp.com/super-helper/super-helper-icon.png">
+</p>
 
-一款基于electron写的小工具箱，用来存放一些自己常用的工具集合；
+下载地址
+[mac v1.0.1](http://qiniu.ifengzp.com/super-helper/mac/super-helper-1.0.1.dmg)，[window v1.0.1](http://qiniu.ifengzp.com/super-helper/win/super-helper-1.0.1.exe)
 
-在平时有些挺有用的办公工具比如截图取字，可以大大提高效率，就顺手写一个将就用一下，目前功能只有两个：
+一款基于electron写的小工具箱，用来存放一些自己常用但是网上又没用现成可用的小工具，比如截图取字、字体包压缩等，目前已添加的功能如下：
 - 截图取字
 - PDF转图
+- 压缩字体包
 
-目前除了这两个功能能够大大提升我的效率外，还没想到要添加什么其他功能，后面如果再遇到痒点会慢慢往上面造轮子，大于五个会考虑重构下代码
+后面如果再遇到痒点会慢慢往上面造轮子，大于五个会考虑重构下代码
 
 # TODO
-- [x]压缩字体包
-- [ ] 图片压缩
-- [ ] 更新
-
-
-# 下载
-
-[mac](./dist/super-helper-1.0.0.dmg)
-
-[window](./dist/super-helper-1.0.0.exe)
-
-
+- [x] 自动更新
+- [x] 压缩字体包功能
+- [ ] 图片压缩功能
+- [ ] 代码重构，开发热更新，模块化
 
