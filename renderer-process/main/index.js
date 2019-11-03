@@ -1,4 +1,6 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, shell } = require("electron");
+const version = require("./../../package.json").version;
+
 $(document).ready(function() {
   $("#img2word").click(e => {
     ipcRenderer.send("createImg2wordWindow");
@@ -10,3 +12,25 @@ $(document).ready(function() {
     ipcRenderer.send("createExtractFontWindow");
   });
 });
+
+$.get(
+  "https://super-helper.ifengzp.com/client/check_version",
+  {
+    version: version,
+    os: process.platform === "win32" ? "win" : "mac"
+  },
+  res => {
+    const { downloadUrl } = res;
+    if (downloadUrl) {
+      $("body").prepend(
+        "<a id='downloadBtn' href=" +
+          downloadUrl +
+          ">检测到新版本，请点击下载</a>"
+      );
+      $("#downloadBtn").click(e => {
+        e.preventDefault();
+        shell.openExternal($("#downloadBtn").attr("href"));
+      });
+    }
+  }
+);
