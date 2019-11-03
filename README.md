@@ -1,6 +1,10 @@
 <p align="center">
   <img width="375" height="80" src="http://qiniu.ifengzp.com/super-helper/super-helper-icon.png">
 </p>
+<p align="center">
+  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/ifengzp/electron-super-helper?color=%2351C82D">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ifengzp/electron-super-helper">
+</p>
 
 下载地址
 [mac v1.0.1](http://qiniu.ifengzp.com/super-helper/mac/super-helper-1.0.1.dmg)，[window v1.0.1](http://qiniu.ifengzp.com/super-helper/win/super-helper-1.0.1.exe)
